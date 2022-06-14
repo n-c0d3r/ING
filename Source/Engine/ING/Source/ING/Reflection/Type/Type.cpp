@@ -20,6 +20,13 @@
 
 
 
+/**
+ *	Include Context
+ */
+#include <ING/Reflection/Context/Context.h>
+
+
+
 namespace ING {
 
 	namespace Reflection {
@@ -33,6 +40,26 @@ namespace ING {
 		{
 
 			_namespace->AddType(this);
+
+			if(_namespace == _namespace->GetContext()->GetGlobalNamespace())
+				fullName = name;
+			else {
+
+				fullName = "";
+
+				Namespace* n = _namespace;
+
+				while (n != n->GetContext()->GetGlobalNamespace()) {
+
+					fullName = n->GetName() + "::" + fullName;
+
+					n = n->GetParent();
+
+				}
+
+				fullName = fullName + name;
+
+			}
 
 		}
 

@@ -38,7 +38,7 @@ namespace ING {
 			
 			EngineThread* applicationThread = (EngineThread*)thread;
 
-			while (Engine::GetInstance()->GetState() == RUNNING_APPLICATION_STATE) {
+			while (Engine::GetInstance()->GetState() == RUNNING_ENGINE_STATE) {
 
 				applicationThread->Update();
 
@@ -98,7 +98,7 @@ namespace ING {
 
 			mutex.lock();
 
-			if (Engine::GetInstance()->GetState() != RUNNING_APPLICATION_STATE) {
+			if (Engine::GetInstance()->GetState() != RUNNING_ENGINE_STATE) {
 
 				isFrameStart = false;
 

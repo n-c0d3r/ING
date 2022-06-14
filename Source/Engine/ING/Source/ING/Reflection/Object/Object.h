@@ -79,11 +79,17 @@ namespace ING {
 		private:
 			IClass*		_class;
 
+			Context*	context;
+			String		classFullName;
+
 			std::unordered_map<String, IObjectFunction*> name2Function;
 			std::unordered_map<String, IObjectProcedure*> name2Procedure;
 
 		public:
-			IClass*		GetClass() { return _class; }
+			IClass*		GetClass () { return _class; }
+
+			Context*	GetContext () { return context; }
+			const String&GetClassFullName () { return classFullName; }
 
 			template<typename T>
 			T& GetProperty(const String& name) {
@@ -113,9 +119,6 @@ namespace ING {
 			/**
 			 *	Methods
 			 */
-		private:
-			Context*GetContext();
-
 		public:
 			void*   GetPropertyPointer(const String& name);
 
@@ -125,6 +128,13 @@ namespace ING {
 				return T::CreateInstance(GetContext(), args...);
 
 			}
+
+			void	UpdateClass();
+
+			void	LoadFunctions();
+			void	UnloadFunctions();
+			void	LoadProcedures();
+			void	UnloadProcedures();
 
 		};
 

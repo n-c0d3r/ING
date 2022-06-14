@@ -109,6 +109,18 @@ namespace ING {
 		
 		if (!loadFunction(ING::Engine::GetInstance(), this)) return false;
 
+		if (ING::Engine::GetInstance()->GetState() == RUNNING_ENGINE_STATE) {
+
+			LateCreate();
+
+			PreInit();
+
+			LateInit();
+
+			PreRun();
+
+		}
+
 		return true;
 	}
 

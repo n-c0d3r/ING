@@ -203,6 +203,8 @@ namespace ING {
 			IClass*			base;
 			Context*		context;
 
+			std::unordered_map<size_t, C_Object*> id2ObjectMap;
+
 		private:
 			IProcedure*		instanceConstructorCaller;
 
@@ -263,6 +265,8 @@ namespace ING {
 
 			}
 
+			const std::unordered_map<size_t, C_Object*>& GetId2ObjectMap() { return id2ObjectMap; }
+
 
 
 			/**
@@ -293,6 +297,9 @@ namespace ING {
 				return result;
 
 			}
+
+			void			AddObject	(C_Object* object);
+			void			RemoveObject(C_Object* object);
 
 		};
 

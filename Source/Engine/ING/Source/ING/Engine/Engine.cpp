@@ -188,7 +188,7 @@ namespace ING {
 		configuration(0)
 	{
 
-		state = NONE_APPLICATION_STATE;
+		state = NONE_ENGINE_STATE;
 
 
 
@@ -276,7 +276,7 @@ namespace ING {
 
 
 
-		state = CREATED_APPLICATION_STATE;
+		state = CREATED_ENGINE_STATE;
 
 
 
@@ -422,7 +422,7 @@ namespace ING {
 
 	bool Engine::Run() {
 
-		state = RUNNING_APPLICATION_STATE;
+		state = RUNNING_ENGINE_STATE;
 
 		Debug::Log("Start Running Engine");		
 		
@@ -457,7 +457,7 @@ namespace ING {
 		Debug::Log("Start Gameloop");
 
 		/* Game Loop */
-		while (state == RUNNING_APPLICATION_STATE) {
+		while (state == RUNNING_ENGINE_STATE) {
 
 			/* Check Message */
 			if (!WindowManager::GetInstance()->CheckMessage()) {
@@ -508,7 +508,7 @@ namespace ING {
 
 	void Engine::Shutdown() {
 
-		state = CLOSED_APPLICATION_STATE; 
+		state = CLOSED_ENGINE_STATE;
 
 		Debug::Log("Start Shuting Down Engine");
 

@@ -44,6 +44,10 @@ namespace ING {
 			instanceConstructorCaller(0)
 		{
 
+			groupName = "Class";
+
+
+
 			if (base == 0) {
 
 				base = context->GetClass(IType::TypeInfoToFullName(typeid(Reflection::C_Object)));
@@ -236,6 +240,19 @@ namespace ING {
 		C_Object* IClass::ICreateInstance() {
 
 			return 0;
+		}
+
+		void IClass::AddObject(C_Object* object) {
+
+			id2ObjectMap[object->GetId()] = object;
+
+		}
+
+		void IClass::RemoveObject(C_Object* object) {
+
+			if(id2ObjectMap.find(object->GetId()) != id2ObjectMap.end())
+				id2ObjectMap.erase(object->GetId());
+
 		}
 
 	}

@@ -48,6 +48,13 @@
 
 
 
+/**
+ *	Include Context
+ */
+#include <ING/Reflection/Context/Context.h>
+
+
+
 namespace ING {
 
 	namespace Reflection {
@@ -60,21 +67,72 @@ namespace ING {
 			_class(_class)
 		{
 
-			for (auto item : _class->GetName2MemberMap()) {
+			if (_class->GetNamespace() == _class->GetNamespace()->GetContext()->GetGlobalNamespace()) {
 
-				if (item.second.memberType == 1) {
+				classFullName = _class->GetName();
 
-					if(name2Function.find(item.second.name) != name2Function.end()) {
+			}
+			else {
 
-						name2Function[item.second.name]->Release();
+				Namespace* _namespace = _class->GetNamespace();
 
-					}
+				while (_namespace != _namespace->GetContext()->GetGlobalNamespace()) {
 
-					name2Function[item.second.name] = item.second.functionCreator(this);
+					classFullName += _namespace->GetName() + "::";
+
+					_namespace = _namespace->GetParent();
 
 				}
 
+				classFullName += _class->GetName();
+
 			}
+
+			context = _class->GetContext();
+
+			LoadProcedures();
+			LoadFunctions();
+
+		}
+
+		C_Object::~C_Object() {
+
+
+
+		}
+
+
+
+		/**
+		 *	Release Methods
+		 */
+		void C_Object::Release() {
+
+			UnloadFunctions();
+
+			UnloadProcedures();
+
+			delete this;
+		}
+
+
+
+		/**
+		 *	Methods
+		 */
+		void* C_Object::GetPropertyPointer(const String& name) {
+
+			return ((char*)this) + _class->GetMember(name).offsetInBytes;
+
+		}
+
+		void C_Object::UpdateClass() {
+
+			_class = context->GetClass(classFullName);
+
+		}
+
+		void C_Object::LoadProcedures() {
 
 			for (auto item : _class->GetName2MemberMap()) {
 
@@ -94,24 +152,7 @@ namespace ING {
 
 		}
 
-		C_Object::~C_Object() {
-
-
-
-		}
-
-
-
-		/**
-		 *	Release Methods
-		 */
-		void C_Object::Release() {
-
-			for (auto item : name2Function) {
-
-				item.second->Release();
-
-			}
+		void C_Object::UnloadProcedures() {
 
 			for (auto item : name2Procedure) {
 
@@ -119,23 +160,35 @@ namespace ING {
 
 			}
 
-			delete this;
 		}
 
+		void C_Object::LoadFunctions() {
 
+			for (auto item : _class->GetName2MemberMap()) {
 
-		/**
-		 *	Methods
-		 */
-		Context* C_Object::GetContext() {
+				if (item.second.memberType == 1) {
 
-			return _class->GetContext();
+					if (name2Function.find(item.second.name) != name2Function.end()) {
+
+						name2Function[item.second.name]->Release();
+
+					}
+
+					name2Function[item.second.name] = item.second.functionCreator(this);
+
+				}
+
+			}
 
 		}
 
-		void* C_Object::GetPropertyPointer(const String& name) {
+		void C_Object::UnloadFunctions() {
 
-			return ((char*)this) + _class->GetMember(name).offsetInBytes;
+			for (auto item : name2Function) {
+
+				item.second->Release();
+
+			}
 
 		}
 

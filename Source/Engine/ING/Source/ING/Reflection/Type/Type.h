@@ -62,10 +62,20 @@ namespace ING {
 		private:
 			String			name;
 
+			String			fullName;
+
+		protected:
+			String			groupName;
+
+		public:
 			Namespace*		_namespace;
 
 		public:
 			const String&	GetName		() { return name; }
+
+			const String&	GetFullName	() { return fullName; }
+
+			const String&	GetGroupName() { return groupName; }
 
 			Namespace*		GetNamespace() { return _namespace; }
 

@@ -42,6 +42,10 @@ namespace ING {
 			context(_namespace->GetContext())
 		{
 
+			groupName = "Struct";
+
+
+
 			if (base == 0) {
 
 				base = context->GetStruct(IType::TypeInfoToFullName(typeid(Reflection::S_Object)));
