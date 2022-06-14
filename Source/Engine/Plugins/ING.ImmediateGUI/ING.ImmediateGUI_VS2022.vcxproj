@@ -185,6 +185,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -228,6 +229,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -270,6 +272,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -313,6 +316,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -356,6 +360,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -398,6 +403,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY "$(ProjectDir)..\Plugins.json" "$(OutDir)..\Plugins.json" /y
+      COPY "$(ProjectDir)\Dependencies.igitignore" "$(OutDir)\Dependencies.igitignore" /y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

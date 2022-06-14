@@ -62,12 +62,16 @@ namespace ING {
 		WString path;
 		bool	isLoaded;
 
+		std::vector<String> dependenciesVector;
+
 		List<IPlugin*>::Node* node;
 
 	public:
 		const String&	GetName() { return name; }
 		const WString&	GetPath() { return path; }
 		bool			IsLoaded() { return isLoaded; }
+
+		const std::vector<String>& GetDependenciesVector() { return dependenciesVector; }
 
 		List<IPlugin*>::Node* GetNode() { return node; }
 

@@ -27,6 +27,13 @@
 
 
 
+/**
+ *	Include Resource Manager
+ */
+#include <ING/Resource/Manager/Manager.h>
+
+
+
 namespace ING {
 
 	/**
@@ -39,6 +46,8 @@ namespace ING {
 	{
 
 		isLoaded = false;
+
+		dependenciesVector = ParseJSON(ResourceManager::GetInstance()->ReadFile(Path::Normalize(Path::GetDirectoryPath(path) + L"/Dependencies.igitignore"))).get<std::vector<std::string>>();
 
 	}
 

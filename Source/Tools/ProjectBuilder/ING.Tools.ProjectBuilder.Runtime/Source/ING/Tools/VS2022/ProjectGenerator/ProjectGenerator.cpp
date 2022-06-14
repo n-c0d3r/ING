@@ -249,6 +249,21 @@ namespace ING {
 
 
 
+				if (pluginJSON.find("dependencies") != pluginJSON.end()) {
+
+					WString pluginDependenciesJSON = ToWString(pluginJSON["dependencies"].dump());
+
+					GetProjectBuilder()->SetPlaceholder("INGPluginDependenciesJSON", pluginDependenciesJSON);
+
+				}
+				else {
+
+					GetProjectBuilder()->SetPlaceholder("INGPluginDependenciesJSON", L"[]");
+
+				}
+
+
+
 				WString pluginIncludePath = L";";
 
 				for (auto item : dependencies) {
@@ -464,6 +479,28 @@ namespace ING {
 						);
 
 				}
+
+
+
+				WString targetDependenciesPath = Path::Normalize(GetProjectBuilder()->GetPlaceholder("INGAbsProjectDir") + ToWString("/Plugins/") + pluginWName + ToWString("/Dependencies.igitignore"));
+
+				if (std::filesystem::exists(targetDependenciesPath)) {
+
+					std::filesystem::remove(targetDependenciesPath);
+
+				}
+
+				GetProjectBuilder()
+					->GetFileWriter()
+					->Write(
+
+						targetDependenciesPath,
+
+						GetProjectBuilder()
+						->GetFileReader()
+						->Read(L"./Templates/VS2022/Plugin/Dependencies.igitignore")
+
+					);
 
 			}
 
